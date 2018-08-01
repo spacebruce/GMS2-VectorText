@@ -15,8 +15,8 @@ DrawY += (24 * Scale);	//Font data is stored upside down, re-orient to top
 
 var Index = ord(Char) - 32;	//Font starts at 32
 var Offset = Index * 112;	//112 entries per char
-var Pairs = SimplexFont[Offset];
-var Spacing = SimplexFont[Offset + 1];
+var Pairs = SimplexFont[Offset++];
+var Spacing = SimplexFont[Offset++];
 
 draw_set_colour(Col);
 
@@ -24,20 +24,17 @@ var OldX = -1;
 var OldY = -1;
 for(var i=0; i<Pairs; ++i)
 {
-	Offset += 2;
-	var odd = i & 1;
-	
-	var PenX = SimplexFont[Offset];
-	var PenY = SimplexFont[Offset+1];
+	var PenX = SimplexFont[Offset++];
+	var PenY = SimplexFont[Offset++];
 	
 	if(PenX != -1) && (PenY != -1)
 	{
 		PenX *= Scale;
 		PenY *= Scale;
-	}
-	if((OldX != -1) && (OldY != -1) && (PenX != -1) && (PenY != -1))	//If both points are valid, draw the line
-	{
-		draw_line(DrawX+ OldX,DrawY-OldY,DrawX+PenX,DrawY-PenY);
+		if((OldX != -1) && (OldY != -1))
+		{
+			draw_line(DrawX+ OldX,DrawY-OldY,DrawX+PenX,DrawY-PenY);
+		}
 	}
 	
 	OldX = PenX;
