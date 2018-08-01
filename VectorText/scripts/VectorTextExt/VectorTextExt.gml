@@ -6,7 +6,6 @@
 /// @param {real} Colour
 /// @param {real} HAlignment
 /// @param {real} VAlignment
-
 var String = argument[0];
 var DrawXStart = argument[1];	
 var DrawY = argument[2];
@@ -50,6 +49,6 @@ for(var i=0; i<string_length(String); ++i)
 	}
 	else
 	{
-		DrawX += VectorTextChar(string_char_at(String,i+1),DrawX,DrawY,Scale,Col);
+		DrawX += VectorTextChar(Char,DrawX,DrawY,Scale,Col);
 	}
 }
