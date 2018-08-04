@@ -1,4 +1,4 @@
-///VectorText(String,X,Y);
+/// @function VectorText(String,X,Y);
 /// @param {string} String
 /// @param {real} X
 /// @param {real} Y
