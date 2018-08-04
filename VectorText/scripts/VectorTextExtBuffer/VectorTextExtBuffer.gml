@@ -16,13 +16,13 @@ var Col = argument[5];
 var Halign = (argument_count >=7) ? argument[6] : fa_left;
 var Valign = (argument_count >= 8) ? argument[7] : fa_top;
 var LineCount = string_count("\n",String)+1;
-var WidthLine = array_create(LineCount,0);
 var DrawXStart = array_create(LineCount,0);
 
 if(Halign != fa_left)	//Reorient text on X
 {
 	//Count every chars width
 	var LineNo = 0;
+	var WidthLine = array_create(LineCount,0);
 	for(var i=0; i<string_length(String); ++i)	
 	{
 		var Char = string_char_at(String,i+1);
