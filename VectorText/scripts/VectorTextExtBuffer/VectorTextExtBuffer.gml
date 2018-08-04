@@ -1,4 +1,4 @@
-/// @function VectorTextExt(String,X,Y,Scale,Col,[Halign],[Valign]);
+/// @function VectorTextExtBuffer(Buffer,String,X,Y,Scale,Col,[Halign],[Valign]);
 /// @param {real} Buffer
 /// @param {string} String
 /// @param {real} X

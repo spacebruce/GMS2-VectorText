@@ -1,4 +1,4 @@
-/// @function FontChar(Char,X,Y,Scale,Col);
+/// @function VectorTextChar(Char,X,Y,Scale,Col);
 /// @param {string} Char
 /// @param {real} X
 /// @param {real} Y
