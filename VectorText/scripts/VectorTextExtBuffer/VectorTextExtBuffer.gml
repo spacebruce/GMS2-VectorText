@@ -9,35 +9,42 @@
 /// @param {real} VAlignment
 var Buffer = argument[0];
 var String = argument[1];
-var DrawXStart = argument[2];	
+var DrawX = argument[2];	
 var DrawY = argument[3];
 var Scale = argument[4];
 var Col = argument[5];
 var Halign = (argument_count >=7) ? argument[6] : fa_left;
 var Valign = (argument_count >= 8) ? argument[7] : fa_top;
+var LineCount = string_count("\n",String)+1;
+var WidthLine = array_create(LineCount,0);
+var DrawXStart = array_create(LineCount,0);
 
 if(Halign != fa_left)	//Reorient text on X
 {
-	var Width = 0;	
-	var WidthLine = 0;
-	for(var i=0; i<string_length(String); ++i)	//Count every chars width
+	//Count every chars width
+	var LineNo = 0;
+	for(var i=0; i<string_length(String); ++i)	
 	{
 		var Char = string_char_at(String,i+1);
 		if(Char == "\n")
 		{
-			WidthLine = 0;
+			LineNo++;
 		}
 		else
 		{
 			var Index = ord(Char) - 32;	
-			var Offset = Index * 112;	
-			WidthLine +=  SimplexFont[Offset + 1] * Scale;
+			var Offset = (Index * 112) + 1;
+			WidthLine[LineNo] +=  SimplexFont[Offset] * Scale;
 		}
-		Width = max(WidthLine,Width);
 	}
-	//Change X start point based on Width and settings
-	if((Halign == fa_center) || (Halign == fa_middle))		{	DrawXStart -= Width/2;	};	
-	if(Halign == fa_right)		{	DrawXStart-= Width;		};
+	//Align line based on width
+	for(var i=0; i<LineCount; ++i)
+	{
+		if((Halign == fa_center) || (Halign == fa_middle))	
+			DrawXStart[i] = DrawX - (WidthLine[i] / 2);	
+		else if (Halign == fa_right)	
+			DrawXStart[i] = DrawX - WidthLine[i];
+	}
 }
 
 //Change Y start point
@@ -50,17 +57,18 @@ if(Valign == fa_bottom)
 	DrawY -= 32 * Scale;
 }
 
-var DrawX = DrawXStart;
+var CharX = DrawXStart[0];
+var LineNo = 0;
 for(var i=0; i<string_length(String); ++i)
 {
 	var Char = string_char_at(String,i+1);
 	if(Char == "\n")
-	{	
-		DrawX = DrawXStart;	
+	{
+		CharX = DrawXStart[++LineNo];	
 		DrawY += 32 * Scale;
 	}
 	else
 	{
-		DrawX += VectorTextCharBuffer(Buffer,Char,DrawX,DrawY,Scale,Col);
+		CharX += VectorTextCharBuffer(Buffer,Char,CharX,DrawY,Scale,Col);
 	}
 }
