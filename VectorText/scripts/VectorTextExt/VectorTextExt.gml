@@ -16,6 +16,8 @@ var Valign = (argument_count >= 7) ? argument[6] : fa_top;
 var LineCount = string_count("\n",String)+1;
 var DrawXStart = array_create(LineCount,0);
 
+gml_pragma("global", "VectorTextData()");
+
 if(Halign != fa_left)	//Reorient text on X
 {
 	//Count every chars width
