@@ -15,8 +15,8 @@ DrawY += (24 * Scale);	//Font data is stored upside down, re-orient to top
 
 var Index = ord(Char) - 32;	//Font starts at 32
 var Offset = Index * 112;	//112 entries per char
-var Pairs = SimplexFont[Offset++];
-var Spacing = SimplexFont[Offset++];
+var Pairs = global.SimplexFont[Offset++];
+var Spacing = global.SimplexFont[Offset++];
 
 draw_set_colour(Col);
 
@@ -24,8 +24,8 @@ var OldX = -1;
 var OldY = -1;
 for(var i=0; i<Pairs; ++i)
 {
-	var PenX = SimplexFont[Offset++];
-	var PenY = SimplexFont[Offset++];
+	var PenX = global.SimplexFont[Offset++];
+	var PenY = global.SimplexFont[Offset++];
 	
 	if(PenX != -1) && (PenY != -1)
 	{

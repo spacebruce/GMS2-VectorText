@@ -34,7 +34,7 @@ if(Halign != fa_left)	//Reorient text on X
 		{
 			var Index = ord(Char) - 32;	
 			var Offset = (Index * 112) + 1;
-			WidthLine[LineNo] +=  SimplexFont[Offset] * Scale;
+			WidthLine[LineNo] +=  global.SimplexFont[Offset] * Scale;
 		}
 	}
 	//Align line based on width
